@@ -45,6 +45,7 @@ namespace SUS.HTTP
                 }
             }
 
+
             if (this.Headers.Any(x => x.Name == HttpConstants.RequestCookieHeader))
             {
                 var cookiesAsString = this.Headers.FirstOrDefault(x =>

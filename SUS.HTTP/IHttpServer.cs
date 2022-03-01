@@ -1,16 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace SUS.HTTP
 {
     public interface IHttpServer
-    {       
+    {
+        void AddRoute
+       (string path, Func<HttpRequest, HttpResponse> action);
+
         Task StartAsync(int port);
-
-        //void AddRoute
-        //(string path, Funl<HttpRequest, HttpResponce>action);
-
-        //void Start(int port);
-
-
     }
 }

@@ -18,6 +18,7 @@ namespace SUS.HTTP
             this.Value = headerParts[1];
         }
 
+
         public string Name { get; set; }
 
         public string Value { get; set; }

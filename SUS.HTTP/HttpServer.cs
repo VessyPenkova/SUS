@@ -11,10 +11,19 @@ namespace SUS.HTTP
 {
     public class HttpServer : IHttpServer
     {
-        List<Route> routeTable;
-        public HttpServer(List<Route> routeTable)
+        IDictionary<string, Func<HttpRequest, HttpResponse>>
+            routeTable = new Dictionary<string, Func<HttpRequest, HttpResponse>>();
+
+        public void AddRoute(string path, Func<HttpRequest, HttpResponse> action)
         {
-            this.routeTable = routeTable;
+            if (routeTable.ContainsKey(path))
+            {
+                routeTable[path] = action;
+            }
+            else
+            {
+                routeTable.Add(path, action);
+            }
         }
 
         public async Task StartAsync(int port)
@@ -43,7 +52,6 @@ namespace SUS.HTTP
                     {
                         int count =
                             await stream.ReadAsync(buffer, position, buffer.Length);
-
                         position += count;
 
                         if (count < buffer.Length)
@@ -59,27 +67,16 @@ namespace SUS.HTTP
                         }
                     }
 
-                    // byte[] => string (text)=> Encoding
+                    // byte[] => string (text)
                     var requestAsString = Encoding.UTF8.GetString(data.ToArray());
                     var request = new HttpRequest(requestAsString);
                     Console.WriteLine($"{request.Method} {request.Path} => {request.Headers.Count} headers");
 
-                    //HttpResponse response;
-
-                    var responceHtml = "<h1>Welcome!</h1>" +
-                        request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-                    var responseBodyBytes = Encoding.UTF8.GetBytes(responceHtml);
-                    var response = new HttpResponse("text/html", responseBodyBytes);
-                    response.Headers.Add(new Header("Server", "SUS Server 1.0"));
-                    var responseHeaderBytes = Encoding.UTF8.GetBytes(response.ToString());
-
-                    var route = this.routeTable.FirstOrDefault
-                        ( x =>string.Compare(x.Path, request.Path, true)== 0  && x.Method == request.Method);
-
-                    if (route != null)
+                    HttpResponse response;
+                    if (this.routeTable.ContainsKey(request.Path))
                     {
-
-                        response = route.Action(request);
+                        var action = this.routeTable[request.Path];
+                        response = action(request);
                     }
                     else
                     {
@@ -89,14 +86,15 @@ namespace SUS.HTTP
 
                     response.Cookies.Add(new ResponseCookie("sid", Guid.NewGuid().ToString())
                     { HttpOnly = true, MaxAge = 60 * 24 * 60 * 60 });
-                          
+                    response.Headers.Add(new Header("Server", "SUS Server 1.0"));
+                    var responseHeaderBytes = Encoding.UTF8.GetBytes(response.ToString());
                     await stream.WriteAsync(responseHeaderBytes, 0, responseHeaderBytes.Length);
                     await stream.WriteAsync(response.Body, 0, response.Body.Length);
                 }
 
                 tcpClient.Close();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Console.WriteLine(ex);
             }

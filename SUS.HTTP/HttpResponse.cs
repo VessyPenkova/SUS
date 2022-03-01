@@ -6,15 +6,7 @@ namespace SUS.HTTP
 {
     public class HttpResponse
     {
-
-        public HttpResponse(HttpStatusCode statusCode)
-        {
-            this.StatusCode = statusCode;
-            this.Headers = new List<Header>();
-            this.Cookies = new List<Cookie>();
-        }
-        public HttpResponse
-            (string contentType, byte[] body, HttpStatusCode statusCode = HttpStatusCode.Ok)
+        public HttpResponse(string contentType, byte[] body, HttpStatusCode statusCode = HttpStatusCode.Ok)
         {
             if (body == null)
             {
