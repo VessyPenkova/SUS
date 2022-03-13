@@ -26,6 +26,7 @@ namespace SUS.HTTP
             bool isInHeaders = true;
 
             StringBuilder bodyBuilder = new StringBuilder();
+
             while (lineIndex < lines.Length)
             {
                 var line = lines[lineIndex];
