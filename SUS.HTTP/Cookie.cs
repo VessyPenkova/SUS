@@ -7,7 +7,6 @@
             this.Name = name;
             this.Value = value;
         }
-
   
         public Cookie(string cookieAsString)
         {

@@ -1,10 +1,10 @@
-﻿using SUS.HTTP;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SUS.HTTP
+﻿namespace SUS.HTTP
 {
+    using SUS.HTTP;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Route
     {
         public Route

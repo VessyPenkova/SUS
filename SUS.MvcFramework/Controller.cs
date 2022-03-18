@@ -1,12 +1,10 @@
-﻿
-using SUS.HTTP;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-
-namespace SUS.MvcFramework
+﻿namespace SUS.MvcFramework
 {
+    using SUS.HTTP;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Text;
+
     public abstract class Controller
     {
         public HttpResponse View([CallerMemberName]string viewPath = null)
@@ -36,7 +34,7 @@ namespace SUS.MvcFramework
 
         public HttpResponse Redirect(string url)
         {
-            var response = new HttpResponse(HttpStatusCode.Found);
+            var response = new HttpResponse( HttpStatusCode.Found);
             response.Headers.Add(new Header("Location", url));
             return response;
         }

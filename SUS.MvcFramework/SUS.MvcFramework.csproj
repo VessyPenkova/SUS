@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SUS.HTTP\SUS.HTTP.csproj" />
-
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,13 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-
-namespace SUS.MvcFramework.ViewEngine
+﻿namespace SUS.MvcFramework.ViewEngine
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.Emit;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+
     public class SusViewEngine : IViewEngine
     {
         public string GetHtml(string templateCode, object viewModel)

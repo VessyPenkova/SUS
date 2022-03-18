@@ -1,15 +1,13 @@
-﻿
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SUS.HTTP
+﻿namespace SUS.HTTP
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading.Tasks;
     public class HttpServer : IHttpServer
     {
         IDictionary<string, Func<HttpRequest, HttpResponse>>
@@ -40,7 +38,7 @@ namespace SUS.HTTP
             while (true)
             {
                 TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
-               await ProcessClientAsync(tcpClient);
+                ProcessClientAsync(tcpClient);
             }
         }
 
@@ -50,10 +48,9 @@ namespace SUS.HTTP
             {
                 using (NetworkStream stream = tcpClient.GetStream())
                 {
-                    // TODO: research if there is faster data structure for array of bytes
                     List<byte> data = new List<byte>();
                     int position = 0;
-                    byte[] buffer = new byte[HttpConstants.BufferSize]; // chunk
+                    byte[] buffer = new byte[HttpConstants.BufferSize];
                     while (true)
                     {
                         int count =
@@ -73,9 +70,10 @@ namespace SUS.HTTP
                         }
                     }
 
-                    // byte[] => string (text)
+                    // byte[] => string (text)=> Encoding
                     var requestAsString = Encoding.UTF8.GetString(data.ToArray());
                     var request = new HttpRequest(requestAsString);
+
                     Console.WriteLine($"{request.Method} {request.Path} => {request.Headers.Count} headers");
 
                     HttpResponse response;

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SUS.HTTP
+﻿namespace SUS.HTTP
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class HttpResponse
     {
         public HttpResponse(string contentType, byte[] body, HttpStatusCode statusCode = HttpStatusCode.Ok)

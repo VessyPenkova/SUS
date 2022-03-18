@@ -1,5 +1,4 @@
-﻿
-namespace SUS.MvcFramework.ViewEngine
+﻿namespace SUS.MvcFramework.ViewEngine
 {
     public interface IView
     {

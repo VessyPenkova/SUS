@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SUS.HTTP
+﻿namespace SUS.HTTP
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
     public class ResponseCookie : Cookie
     {
         public ResponseCookie(string name, string value)

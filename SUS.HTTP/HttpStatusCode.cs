@@ -1,5 +1,4 @@
 ﻿namespace SUS.HTTP
-
 {
     public enum HttpStatusCode
     {

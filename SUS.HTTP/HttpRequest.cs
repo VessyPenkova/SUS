@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-namespace SUS.HTTP
+﻿namespace SUS.HTTP
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class HttpRequest
     {
         public HttpRequest(string requestString)
