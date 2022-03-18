@@ -34,7 +34,7 @@
 
         public HttpResponse Redirect(string url)
         {
-            var response = new HttpResponse( HttpStatusCode.Found);
+            var response = new HttpResponse(url);
             response.Headers.Add(new Header("Location", url));
             return response;
         }
